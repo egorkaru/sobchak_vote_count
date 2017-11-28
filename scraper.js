@@ -17,14 +17,15 @@ function updateRow(db, votes) {
 	// Insert some data.
 	const timestamp = Date.now()/1000 | 0
 	var statement = db.prepare("INSERT INTO data VALUES (?, ?)");
-	statement.run(votes, timestamp);
+	statement.run(votes);
+	statement.run(timestamp);
 	statement.finalize();
 }
 
 function readRows(db) {
 	// Read some data.
-	db.each("SELECT rowid AS id, name FROM data", function(err, row) {
-		console.log(row.id + ": " + row.name);
+	db.each("SELECT rowid AS id, votes, timestamp FROM data", function(err, row) {
+		console.log(row.id + ": " + row.votes + " : " + row.timestamp);
 	});
 }
 
