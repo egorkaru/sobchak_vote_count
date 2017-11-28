@@ -2,11 +2,11 @@
 
 const cheerio = require("cheerio");
 const request = require("request");
-var sqlite3 = require("sqlite3").verbose();
+const sqlite3 = require("sqlite3").verbose();
 
 function initDatabase(callback) {
 	// Set up sqlite database.
-	var db = new sqlite3.Database("data.sqlite");
+	const db = new sqlite3.Database("data.sqlite");
 	db.serialize(function() {
 		db.run("CREATE TABLE IF NOT EXISTS data (votes TEXT, timestamp INTEGER)");
 		callback(db);
@@ -16,7 +16,7 @@ function initDatabase(callback) {
 function updateRow(db, votes) {
 	// Insert some data.
 	const timestamp = Date.now()/1000 | 0
-	var statement = db.prepare("INSERT INTO data VALUES (?, ?)");
+	const statement = db.prepare("INSERT INTO data VALUES (?, ?)");
 	statement.run(votes, timestamp);
 	statement.finalize();
 }
@@ -24,7 +24,7 @@ function updateRow(db, votes) {
 function readRows(db) {
 	// Read some data.
 	const on = (timestamp) => new Date(Number(timestamp, 0)*1000).toGMTString()
-	
+
 	db.each("SELECT rowid AS id, votes, timestamp FROM data", function(err, row) {
 		console.log(row.id + ": " + row.votes + " : " + on(row.timestamp));
 	});
@@ -61,4 +61,10 @@ function run(db) {
 	})
 }
 
-initDatabase(run);
+function scrape () {
+	initDatabase(run)
+}
+
+scrape()
+
+module.exports = { scrape }

@@ -1,8 +1,9 @@
 {
   "version": "0.0.1",
-  "main": "scraper.js",
+  "main": "job.js",
   "dependencies": {
     "cheerio": "latest",
+    "cron": "^1.3.0",
     "request": "latest",
     "sqlite3": "latest"
   },

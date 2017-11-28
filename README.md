@@ -1,1 +1,4 @@
-This is a scraper that runs on [Morph](https://morph.io). To get started [see the documentation](https://morph.io/documentation)
+Сделим за колличеством подписей у нее на сайте
+
+``` node job.js ``` 
+``` node scraper.js ``` 
