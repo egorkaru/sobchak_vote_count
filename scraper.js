@@ -2,11 +2,11 @@
 
 const cheerio = require("cheerio");
 const request = require("request");
-const sqlite3 = require("sqlite3").verbose();
+var sqlite3 = require("sqlite3").verbose();
 
 function initDatabase(callback) {
 	// Set up sqlite database.
-	const db = new sqlite3.Database("data.sqlite");
+	var db = new sqlite3.Database("data.sqlite");
 	db.serialize(function() {
 		db.run("CREATE TABLE IF NOT EXISTS data (votes TEXT, timestamp INTEGER)");
 		callback(db);
