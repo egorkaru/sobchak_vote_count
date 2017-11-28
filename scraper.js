@@ -16,7 +16,7 @@ function initDatabase(callback) {
 function updateRow(db, votes) {
 	// Insert some data.
 	const timestamp = Date.now()/1000 | 0
-	const statement = db.prepare("INSERT INTO data VALUES (?, ?)");
+	var statement = db.prepare("INSERT INTO data VALUES (?, ?)");
 	statement.run(votes, timestamp);
 	statement.finalize();
 }
